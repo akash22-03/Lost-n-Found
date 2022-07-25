@@ -1,0 +1,20 @@
+html {
+  background: url(set.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.purple{
+	background: #3f51b5
+}
+body {
+  background: none;
+}
+.card-img-top {
+    width: 100%;
+    object-fit: cover;
+}
+.test{
+	padding-top: 150px !important;
+}
