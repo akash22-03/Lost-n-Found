@@ -13,17 +13,23 @@ public class EncryptionProvider {
 	private static final String AES = "AES";
 	//Using block cipher
 	private static final String AES_CIP = "AES/CBC/PKCS5PADDING";
+	public static  byte [] iVector = EncryptionProvider.createInitialVector();
+	public static  SecretKey key = EncryptionProvider.createAESKey(); 
 	
 	//Method to create static key
-	public static SecretKey createAESKey() throws Exception
+	public static SecretKey createAESKey() 
 	{
-		SecureRandom securerandom = new SecureRandom();			//Create new inst. for SecureRandom class
-		KeyGenerator keyGen = KeyGenerator.getInstance(AES);	//Passing string to key generator
-		keyGen.init(128,securerandom);							//Initialize key gen with 256bits
-		SecretKey key = keyGen.generateKey();
+		try {
+			SecureRandom securerandom = new SecureRandom();			//Create new inst. for SecureRandom class
+			KeyGenerator keyGen = KeyGenerator.getInstance(AES);	//Passing string to key generator
+			keyGen.init(128,securerandom);							//Initialize key gen with 256bits
+			SecretKey key = keyGen.generateKey();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return key;
+		
 	}
-	
 	public static byte[] createInitialVector()
 	{
 		byte[] Initial_Vector = new byte[16];

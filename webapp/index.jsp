@@ -18,7 +18,7 @@
                     <p></p>
                     <button onclick="location.href='https://akash22-03.github.io/';" class="btn btn-outline-dark">Visit My Page</button>
                     <button onclick="location.href='';" class="btn btn-outline-dark">LogIn</button>
-                    <button onclick="location.href='';" class="btn btn-outline-dark">Register</button>
+                    <button onclick="location.href='adminReg.jsp';" class="btn btn-outline-dark">Register Admin</button>
                 </div>
             </div>
      </div>

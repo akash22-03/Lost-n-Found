@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.crypto.SecretKey;
+
 import com.entities.Admin;
 import com.entities.Post;
 
@@ -57,15 +59,21 @@ public class Helper
 		Connection con = ConnectionProvider.getConnection();
 		Admin admin = null;
 		try {
+			SecretKey sKey = EncryptionProvider.key;
+			byte[] IVector = EncryptionProvider.iVector;
+			byte[] eAdminname = EncryptionProvider.doAESEncryption(username, sKey, IVector);
+			byte[] ePassword = EncryptionProvider.doAESEncryption(password, sKey, IVector);
+			
 			String query = "select * from admin where adminname = ? and password = ?";
 			PreparedStatement pstmt = con.prepareStatement(query);
-            pstmt.setString(1, username);
-            pstmt.setString(2, password);
+            pstmt.setBytes(1, eAdminname);
+            pstmt.setBytes(2, ePassword);
             ResultSet set = pstmt.executeQuery();
+            
             if(set.next()) {
             	admin = new Admin();
-            	admin.setAdminname(set.getString("adminname"));
-            	admin.setPassword(set.getString("password"));
+            	admin.setAdminname(set.getBytes("adminname"));
+            	admin.setPassword(set.getBytes("password"));
             }
 		}catch(Exception e) {
 			e.printStackTrace();

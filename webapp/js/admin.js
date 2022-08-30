@@ -1,17 +1,18 @@
 
 $(document).ready(function(e){
-                $("#add-post-form").on("submit", function(event){
+                $('#add-admin-form').on('submit', function(event){
                     event.preventDefault();
-                    console.log("Submitted");
+					console.log("Submitted");
                     let form = new FormData(this);
                     $.ajax({
-                        url: "SavePost",
-                        type:'POST',
+                        url: "SaveAdmin",
+                        type:"POST",
                         data: form,
+                        processData: false,
+                        contentType: false,
                         success: function(data,textStatus, jqXHR){
-                            console.log(data);
                             if(data.trim() == 'done'){
-                                swal("Good job!", "Saved Successfully!", "success").then((value)=>{window.location="allPosts.jsp";})
+                                swal("Good job!", "Saved Successfully!", "success")
                             }else{
                                 swal("Error!", "Something went wrong try again..", "error");
                             }
@@ -19,8 +20,8 @@ $(document).ready(function(e){
                         error: function(jqXHR, textStatus, errorThrown){
                             swal("Error!", "Something went wrong try again..", "error");
                         },
-                        processData: false,
-                        contentType: false
+
                     })
                 });
             });
+
